@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bs-body-bg-rgb: 25, 25, 25;
+  --bs-primary-rgb: 0, 123, 255;
+  --bd-accent-rgb: 255, 228, 150;
+  --bd-violet-rgb: 112, 245, 249;
+  --bd-pink-rgb: 214, 51, 132;
+  --text-primary: 255, 255, 255;
+  --text-secondary: 180, 178, 178;
+}
+
+body {
+  @apply overflow-x-hidden;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: rgba(var(--bs-body-bg-rgb), 1);
+  transition: background-color 0.5s ease;
+}
+
+@layer utilities {
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}

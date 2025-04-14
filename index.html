@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adnan Tahir- Software Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- <script ></script> -->
+
+    <script type="module" src="/src/main.jsx">
+      // Random color generation function for dynamic background changes
+      function firstColor() {
+          let red = Math.random() * 255;
+          let green = Math.random() * 255;
+          let blue = Math.random() * 255;
+          return `${red} , ${green} , ${blue}`;
+      }
+
+      function secondColor() {
+          let red = Math.random() * 255;
+          let green = Math.random() * 255;
+          let blue = Math.random() * 255;
+          return `${red} , ${green} , ${blue}`;
+      }
+
+      function thirdColor() {
+          let red = Math.random() * 255;
+          let green = Math.random() * 255;
+          let blue = Math.random() * 255;
+          return `${red} , ${green} , ${blue}`;
+      }
+
+      function fourthColor() {
+          let red = Math.random() * 255;
+          let green = Math.random() * 255;
+          let blue = Math.random() * 255;
+          return `${red} , ${green} , ${blue}`;
+      }
+
+      function fifthColor() {
+          let red = Math.random() * 255;
+          let green = Math.random() * 255;
+          let blue = Math.random() * 255;
+          return `${red} , ${green} , ${blue}`;
+      }
+
+      function changeLinear() {
+          const root = document.querySelector(":root");
+          root.style.setProperty("--bs-primary-rgb", secondColor());
+          root.style.setProperty("--bd-accent-rgb", thirdColor());
+          root.style.setProperty("--bd-violet-rgb", fourthColor());
+          root.style.setProperty("--bd-pink-rgb", fifthColor());
+      }
+
+      setInterval(changeLinear, 2000);
+  </script>
+  </body>
+</html>
