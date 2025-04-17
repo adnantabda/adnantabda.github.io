@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import myPhoto from '../assets/my-photo.png';
 import LoopingRoles from './LoopingRooles';
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
+
 
 const HighlightGreeting = () => {
   return (
@@ -30,6 +33,21 @@ const FloatingWord = ({ text, colorClass, style }) => {
 };
 
 const Hero = () => {
+  const skills = [
+    { name: "Linux", icon: "logos:linux-tux", level: 90 },
+    { name: "Kotlin", icon: "logos:kotlin", level: 85 },
+    { name: "TypeScript", icon: "logos:typescript-icon", level: 88 },
+    { name: "NestJS", icon: "logos:nestjs", level: 82 },
+    { name: "PostgreSQL", icon: "logos:postgresql", level: 80 },
+    { name: "Docker", icon: "logos:docker-icon", level: 78 },
+    { name: "Tailwind CSS", icon: "logos:tailwindcss-icon", level: 95 },
+    { name: "Next.js", icon: "logos:nextjs-icon", level: 90 },
+    { name: "Expo", icon: "logos:expo-icon", level: 75 },
+    { name: "React", icon: "logos:react", level: 92 },
+    { name: "Node.js", icon: "logos:nodejs-icon", level: 85 },
+    { name: "GraphQL", icon: "logos:graphql", level: 70 },
+  ];
+
   const [isDarkMode, setIsDarkMode] = useState(true);
   // const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [words, setWords] = useState([
@@ -51,19 +69,19 @@ const Hero = () => {
     const generateColor = () => Math.floor(Math.random() * 255);
     const updateColors = () => {
       document.documentElement.style.setProperty(
-        '--bs-primary-rgb', 
+        '--bs-primary-rgb',
         `${generateColor()},${generateColor()},${generateColor()}`
       );
       document.documentElement.style.setProperty(
-        '--bd-accent-rgb', 
+        '--bd-accent-rgb',
         `${generateColor()},${generateColor()},${generateColor()}`
       );
       document.documentElement.style.setProperty(
-        '--bd-violet-rgb', 
+        '--bd-violet-rgb',
         `${generateColor()},${generateColor()},${generateColor()}`
       );
       document.documentElement.style.setProperty(
-        '--bd-pink-rgb', 
+        '--bd-pink-rgb',
         `${generateColor()},${generateColor()},${generateColor()}`
       );
     };
@@ -96,7 +114,7 @@ const Hero = () => {
   //       const dx = mousePos.x - word.x;
   //       const dy = mousePos.y - word.y;
   //       const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
   //       const force = distance < 15 ? -0.002 : 0;
   //       const ax = (dx / distance) * force * deltaTime || 0;
   //       const ay = (dy / distance) * force * deltaTime || 0;
@@ -128,40 +146,40 @@ const Hero = () => {
     setWords(prevWords =>
       prevWords.map(word => {
         let { x, y, vx, vy } = word;
-  
+
         // Normalize the velocity vector (direction)
         const magnitude = Math.sqrt(vx * vx + vy * vy);
         const dirX = vx / magnitude;
         const dirY = vy / magnitude;
-  
+
         // Use deltaTime to keep movement framerate-independent
         const moveX = dirX * SPEED * deltaTime;
         const moveY = dirY * SPEED * deltaTime;
-  
+
         x += moveX;
         y += moveY;
-  
+
         // Wrap around bounds (0-100%)
         if (x < 0) x = 100;
         if (x > 100) x = 0;
         if (y < 0) y = 100;
         if (y > 100) y = 0;
-  
+
         return { ...word, x, y, vx: dirX, vy: dirY }; // Store normalized direction for consistency
       })
     );
   };
-  
-  
+
+
   const animate = (timestamp) => {
     if (!lastTimeRef.current) lastTimeRef.current = timestamp;
     const deltaTime = timestamp - lastTimeRef.current;
-    
+
     if (deltaTime > 16) {
       updatePositions(deltaTime);
       lastTimeRef.current = timestamp;
     }
-    
+
     animationFrameRef.current = requestAnimationFrame(animate);
   };
 
@@ -171,7 +189,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div 
+    <div
       className="min-h-screen flex flex-col py-12 px-4 relative overflow-hidden"
       ref={containerRef}
       // onMouseMove={handleMouseMove}
@@ -201,7 +219,7 @@ const Hero = () => {
       ))}
 
       {/* Theme Toggle */}
-      <button 
+      <button
         onClick={() => setIsDarkMode(!isDarkMode)}
         className="absolute top-4 right-4 p-2 rounded-full bg-opacity-20 backdrop-blur-sm z-50"
         style={{
@@ -218,19 +236,19 @@ const Hero = () => {
 
         {/* Left content */}
         <div className="w-full md:w-1/2 pl-6">
-        <HighlightGreeting></HighlightGreeting>
+          <HighlightGreeting></HighlightGreeting>
           <h2 className="text-5xl sm:text-6xl font-extrabold tracking-tight" style={{ color: `rgb(var(--text-primary))` }}>
-            Software Engineer <span className='text-red-600'>👨‍💻</span>
+            Software Engineer <span className='text-red-600'>.</span>
           </h2>
           {/* <h2 className="text-3xl font-extrabold mb-4" style={{ color: `rgb(var(--text-primary))` }}>
             Full-Stack Developer
           </h2> */}
           <LoopingRoles />
-          <p className="text-sm sm:text-base text-gray-300 mt-2 py-1 max-w-xl">
-           I craft clean, scalable, and efficient digital solutions with a deep understanding of system architecture, 
-           <span className='text-yellow-600 font-bold'> full-stack development </span>, and mobile apps. Whether it's building responsive UIs, 
-           <span className='text-yellow-600 font-bold'> architecting backend logic</span>, or designing intuitive user flows I bring clarity, speed, 
-           and precision to every project I touch.
+          <p className="text-sm sm:text-base text-gray-300 mt-2 py-1 max-w-xl" style={{ color: `rgb(var(--text-primary))` }}>
+            I craft clean, scalable, and efficient digital solutions with a deep understanding of system architecture,
+            <span className='text-yellow-600 font-bold'> full-stack development </span>, and mobile apps. Whether it's building responsive UIs,
+            <span className='text-yellow-600 font-bold'> architecting backend logic</span>, or designing intuitive user flows I bring clarity, speed,
+            and precision to every project I touch.
           </p>
 
           <a
@@ -240,52 +258,52 @@ const Hero = () => {
             Get in Touch
           </a>
           <div className="flex justify-start space-x-6 mt-6">
-  {/* Telegram */}
-  <a
-    href="https://t.me/yourusername"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-gray-300 hover:text-blue-500 transition"
-  >
-    <i className="fab fa-telegram fa-2x"></i>
-  </a>
+            {/* Telegram */}
+            <a
+              href="https://t.me/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-blue-500 transition"
+              style={{ color: `rgb(var(--text-primary))` }}>
+              <i className="fab fa-telegram fa-2x"></i>
+            </a>
 
-  {/* LinkedIn */}
-  <a
-    href="https://www.linkedin.com/in/yourusername"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-gray-300 hover:text-blue-500 transition"
-  >
-    <i className="fab fa-linkedin fa-2x"></i>
-  </a>
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-blue-500 transition"
+              style={{ color: `rgb(var(--text-primary))` }}
+            >
+              <i className="fab fa-linkedin fa-2x"></i>
+            </a>
 
-  {/* GitHub */}
-  <a
-    href="https://github.com/yourusername"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-gray-300 hover:text-blue-500 transition"
-  >
-    <i className="fab fa-github fa-2x"></i>
-  </a>
+            {/* GitHub */}
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-blue-500 transition"
+              style={{ color: `rgb(var(--text-primary))` }}
+            >
+              <i className="fab fa-github fa-2x"></i>
+            </a>
 
-  {/* Instagram */}
-  <a
-    href="https://www.instagram.com/yourusername"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-gray-300 hover:text-blue-500 transition"
-  >
-    <i className="fab fa-instagram fa-2x"></i>
-  </a>
-</div>
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-blue-500 transition"
+              style={{ color: `rgb(var(--text-primary))` }}
+            >
+              <i className="fab fa-instagram fa-2x"></i>
+            </a>
+          </div>
 
 
         </div>
-
-
-
         {/* Right content */}
         <div className="hidden sm:block w-full md:w-1/2 rounded-lg overflow-hidden">
           <img
@@ -294,8 +312,10 @@ const Hero = () => {
             className="w-full h-full object-cover my-6"
           />
         </div>
+        
       </section>
     </div>
+
   );
 };
 
