@@ -24,3 +24,9 @@ body {
     backface-visibility: hidden;
   }
 }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
