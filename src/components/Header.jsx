@@ -5,7 +5,7 @@ import logo from '../assets/header-logo.png';
 const Header = () => {
   return (
     <header className="w-full fixed top-0 z-50 bg-opacity-70 backdrop-blur-md text-white">
-      <div className="container mx-auto flex items-center justify-between px-6 py-4">
+      <div className="container mx-auto flex items-center justify-between px-6 py-4"     style={{ color: `rgb(var(--text-primary))`}}> 
         {/* Logo */}
         <a href="#home" className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
