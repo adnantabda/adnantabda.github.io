@@ -3,6 +3,7 @@ import myPhoto from '../assets/my-photo.png';
 import LoopingRoles from './LoopingRooles';
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import Highlights from './Highlights';
 
 
 const HighlightGreeting = () => {
@@ -231,7 +232,7 @@ const Hero = () => {
       </button>
 
       {/* Content Section */}
-      <section className="container mx-auto flex items-center justify-between relative z-10 mt-12">
+      <section className="container mx-auto flex flex-col md:flex-row items-center justify-between relative z-10 mt-12">
 
 
         {/* Left content */}
@@ -312,8 +313,14 @@ const Hero = () => {
             className="w-full h-full object-cover my-6"
           />
         </div>
+        {/* Highlights Section Inside Hero */}
+        
+
         
       </section>
+      <section className="container mx-auto px-6 mt-12 z-10">
+  <Highlights />
+</section>
     </div>
 
   );
