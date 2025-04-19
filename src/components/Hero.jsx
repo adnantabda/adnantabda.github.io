@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import myPhoto from '../assets/my-photo.png';
+import myPhoto2 from '../assets/my-photo2.png'
 import LoopingRoles from './LoopingRooles';
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
@@ -308,7 +309,7 @@ const Hero = () => {
         {/* Right content */}
         <div className="hidden sm:block w-full md:w-1/2 rounded-lg overflow-hidden">
           <img
-            src={myPhoto}
+            src={myPhoto2}
             alt="Your Name"
             className="w-full h-full object-cover my-6"
           />
