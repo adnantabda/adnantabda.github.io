@@ -9,32 +9,41 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 
+
 const highlights = [
   {
-    title: "Taught at Adama Science & Tech University",
-    logos: ["/astu.png"],
-    period: "2018-2020",
-    description: "Lecturer in Computer Science Department"
+    title: "Software Engineering Trainee at A2SV",
+    logos: ['/a2sv-logo2.png'],
+    period: "2024 – Present",
+    description: "Undergoing intensive DSA training as part of A2SV’s elite engineering program."
   },
   {
-    title: "Co-Founder at Tena Solutions",
-    logos: ["/tena.png", "/nestjs.png", "/postgres.png"],
-    period: "2020-Present",
-    description: "Building scalable enterprise solutions"
+    title: "Software Engineering Student at Haramaya University",
+    logos: ["/HU-logo.png"],
+    period: "2022 – Present",
+    description: "Studying at one of Ethiopia’s top universities, majoring in Software Engineering."
   },
   {
-    title: "Worked at OICT - Digital ID System",
-    logos: ["/oict.png", "/figma.png", "/nodejs.png"],
-    period: "2019-2020",
-    description: "Lead Frontend Developer for national ID platform"
+    title: "Co-Founder of HUCISA at Haramaya University",
+    logos: ["/hucisa-logo.png"],
+    period: "2024 – Present",
+    description: "Helped launch and lead one of the largest tech clubs at the university."
   },
   {
-    title: "Freelancer on Fiverr, Freelancer.com, Contra",
-    logos: ["/fiverr.png", "/freelancer.png", "/contra.png"],
-    period: "2017-Present",
-    description: "Completed 50+ projects with 100% satisfaction"
+    title: "Full-Stack Developer at Hulmi Tech Solutions",
+    logos: ["/hulmi-logo.png"],
+    period: "2023 – Present",
+    description: "Contributing to major projects part-time, across both frontend and backend."
   },
+  {
+    title: "Graduate – Iteck School of Programming", 
+    logos: ["/iteck-logo2.png"], 
+    period: "2019 – 2021", 
+    description: "Completed a foundational web development program at a young age, building a strong technical base early on."
+  }
 ];
+
+
 
 const Highlights = () => {
   const { theme } = useTheme();
@@ -110,18 +119,18 @@ const Highlights = () => {
                         key={i}
                         src={src}
                         alt=""
-                        className="w-16 h-fit object-contain"
+                        className="w-28 h-fit object-contain"
                       />
                     ))}
                   </div>
                   <div className="mt-4 text-center h-1/2 flex flex-col justify-between">
-                    <h3
+                    <h4
                       className={`text-lg font-semibold ${
                         theme === "dark" ? "text-white" : "text-gray-800"
                       }`}
                     >
                       {item.title}
-                    </h3>
+                    </h4>
                     <p
                       className={`text-sm ${
                         theme === "dark" ? "text-gray-300" : "text-gray-600"
