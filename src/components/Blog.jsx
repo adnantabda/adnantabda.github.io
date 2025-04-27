@@ -3,7 +3,10 @@ import BlogCard from './BlogCard';
 const BlogSection = () => {
   return (
     <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+      <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white"             style={{
+              color: `rgb(var(--text-primary))`,
+              fontFamily: `'Inter', sans-serif`,
+            }}>
         Latest <span className="text-primary-600 dark:text-primary-400">Blog</span> Posts
       </h2>
       
