@@ -13,7 +13,8 @@ const Footer = () => {
           {/* Left: Name & Role */}
           <div className="text-center md:text-left">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-              <span className="text-blue-400 bg-clip-text text-transparent">
+              <span className="text-blue-400 bg-clip-text "
+            >
                 Adnan Tahir
               </span>
             </h2>
