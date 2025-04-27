@@ -6,7 +6,10 @@ const Main = () => {
 <div className="container mx-auto px-6" id="about">
   <div className="mb-12 text-center">
     <span className="px-4 py-1.5 bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium inline-block mb-4">ABOUT ME</span>
-    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white" style={{ color: `rgb(var(--text-primary))`}}>
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"             style={{
+              color: `rgb(var(--text-primary))`,
+              fontFamily: `'Inter', sans-serif`,
+            }}>
       Who I Am
     </h2>
   </div>
