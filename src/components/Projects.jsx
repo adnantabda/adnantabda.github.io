@@ -1,3 +1,14 @@
+import pimai from '../assets/pimai-screenshot.png'
+
+
+const  projects = [
+  {
+    image : pimai, 
+    descriptiion: "pimai is a personal information management ai website that helps organize plan",
+  }
+]
+
+
 export default function ProjectsSection() {
     return (
       <section className="relative py-20 overflow-hidden">
@@ -13,10 +24,15 @@ export default function ProjectsSection() {
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Header */}
           <div className="mb-12 text-center">
-            <div className="inline-flex items-center rounded-full text-xs mb-3 px-4 py-1.5 bg-primary-50/50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-medium">
+            <div className="inline-flex items-center rounded-full text-xs mb-3 px-4 py-1.5 bg-primary-50/50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-medium"       style={{
+              color: `rgb(var(--text-primary))`,
+              fontFamily: `'Inter', sans-serif`}} >
               MY WORK
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold relative inline-block pb-2">
+            <h2 className="text-3xl md:text-4xl font-bold relative inline-block pb-2"             style={{
+              color: `rgb(var(--text-primary))`,
+              fontFamily: `'Inter', sans-serif`,
+            }}>
               Latest Projects
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"></span>
             </h2>
@@ -40,14 +56,14 @@ export default function ProjectsSection() {
   
           {/* Project cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((_, i) => (
+            {projects.map(({image , descriptiion}, i) => (
               <div
                 key={i}
                 className="rounded-lg shadow-sm overflow-hidden border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 transition-all duration-300 hover:shadow-md hover:translate-y-[-4px] group"
               >
                 <div className="relative h-56 overflow-hidden">
                   <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 text-lg">
-                    Image Placeholder
+                    <img src={image} alt="" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                     <span className="text-white text-sm font-medium mb-1">Category</span>
@@ -56,15 +72,15 @@ export default function ProjectsSection() {
                 </div>
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold group-hover:text-primary-500 transition-colors">
-                      Project Name
+                    <h3 className="text-lg font-bold group-hover:text-primary-500 transition-colors" >
+                      Pimai
                     </h3>
                     <div className="inline-flex items-center rounded-full bg-secondary text-secondary-foreground text-xs px-2.5 py-0.5">
                       Category
                     </div>
                   </div>
                   <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">
-                    Short project description goes here to explain what it is about...
+                    {descriptiion}
                   </p>
                 </div>
                 <div className="p-6 px-5 py-3 flex justify-between items-center">
