@@ -63,7 +63,11 @@ const Highlights = () => {
         transition={{ duration: 0.5 }}
         className="text-center text-3xl sm:text-4xl font-bold mb-12"
       >
-        <span className="bg-gradient-to-r text-white bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r text-white bg-clip-text text-transparent" 
+                    style={{
+                      color: `rgb(var(--text-primary))`,
+                      fontFamily: `'Inter', sans-serif`,
+                    }}>
           Highlights
         </span>
       </motion.h2>
