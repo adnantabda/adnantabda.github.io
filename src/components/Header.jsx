@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../assets/header-logo.png';
+import logo2 from '../assets/header-logo2.png';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 const Header = () => {
