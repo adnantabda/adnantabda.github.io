@@ -21,7 +21,6 @@ const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // For floating animation
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -34,34 +33,20 @@ const Skills = () => {
   return (
     <section 
       ref={ref}
-      className="relative py-20 px-4 overflow-hidden dark:from-gray-900 dark:to-gray-800"
+      className="relative py-20 px-4 overflow-hidden"
     >
-      {/* Background floating tech bubbles */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-blue-500 blur-xl"
-            style={{
-              width: `${Math.random() * 200 + 50}px`,
-              height: `${Math.random() * 200 + 50}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `float ${Math.random() * 10 + 10}s infinite ease-in-out`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
-      </div>
-
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          className="text-4xl font-bold text-center mb-16 bg-gradient-to-r bg-clip-text text-transparent"
+          style={{
+            color: `rgb(var(--text-primary))`,
+            fontFamily: `'Inter', sans-serif`,
+          }}
         >
-          My Tech Stack
+          Skills
         </motion.h2>
 
         <motion.ul
@@ -93,28 +78,26 @@ const Skills = () => {
               className="relative group"
             >
               <motion.div
-style={{
-    rotateX: useSpring(useTransform(mouseY, [-50, 50], [-5, 5])),
-    rotateY: useSpring(useTransform(mouseX, [-50, 50], [5, -5])),
-  }}
-  
+                style={{
+                  rotateX: useSpring(useTransform(mouseY, [-50, 50], [-5, 5])),
+                  rotateY: useSpring(useTransform(mouseX, [-50, 50], [5, -5])),
+                }}
                 className="flex flex-col items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 backdrop-blur-sm"
               >
-                {/* Skill Icon with Gradient Glow */}
+                {/* Original Colored Icon */}
                 <div className="relative mb-4">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300" />
-                  <Icon icon={skill.icon} width="48" height="48" className="relative z-10" />
+                  <Icon icon={skill.icon} width="48" height="48" />
                 </div>
 
                 <p className="text-sm font-medium mb-2">{skill.name}</p>
-                
-                {/* Animated Skill Level Bar */}
+
+                {/* White Progress Bar */}
                 <div className="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={isInView ? { width: `${skill.level}%` } : {}}
                     transition={{ delay: 0.5 + index * 0.05, duration: 1, type: "spring" }}
-                    className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                    className="h-full bg-white"
                   />
                 </div>
                 <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -125,14 +108,6 @@ style={{
           ))}
         </motion.ul>
       </div>
-
-      {/* CSS for floating bubbles */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); }
-          50% { transform: translateY(-20px) translateX(10px); }
-        }
-      `}</style>
     </section>
   );
 };
