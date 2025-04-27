@@ -50,7 +50,10 @@ const ContactSection = () => {
         </div>
 
         <div className="relative z-10 text-center">
-          <h3 className="text-3xl font-bold text-blue-400 bg-clip-text text-transparent mb-4">
+          <h3 className="text-3xl font-bold text-blue-400 bg-clip-text text-transparent mb-4"             style={{
+              color: `rgb(var(--text-primary))`,
+              fontFamily: `'Inter', sans-serif`,
+            }}>
             Let's Build Something Amazing
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto">
