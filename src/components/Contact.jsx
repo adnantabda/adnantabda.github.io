@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
-import { FiMail, FiLinkedin, FiGithub, FiTwitter } from "react-icons/fi";
+import { FiMail, FiLinkedin, FiGithub} from "react-icons/fi";
+import { FaTelegram } from 'react-icons/fa'; // ✅ Font Awesome version
+
 
 const ContactSection = () => {
   const containerRef = useRef(null);
@@ -19,7 +21,7 @@ const ContactSection = () => {
   const background = useMotionTemplate`radial-gradient(180px circle at ${mouseX}px ${mouseY}px, rgba(99, 102, 241, 0.2), transparent 80%)`;
 
   return (
-    <div className="relative py-20 px-4 overflow-hidden dark:to-gray-800">
+    <div className="relative py-20 px-4 overflow-hidden dark:to-gray-800" id="contact">
       {/* Floating gradient dots (background decoration) */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-blue-500 blur-3xl"></div>
@@ -67,25 +69,25 @@ const ContactSection = () => {
               {
                 icon: <FiMail className="w-5 h-5" />,
                 label: "Email Me",
-                href: "mailto:you@example.com",
+                href: "mailto:adnantabda@gmail.com",
                 style: "bg-gradient-to-r from-blue-500 to-blue-600",
               },
               {
                 icon: <FiLinkedin className="w-5 h-5" />,
                 label: "LinkedIn",
-                href: "https://linkedin.com/in/yourusername",
+                href: "https://linkedin.com/in/adnantabda",
                 style: "bg-gradient-to-r from-blue-700 to-blue-800",
               },
               {
                 icon: <FiGithub className="w-5 h-5" />,
                 label: "GitHub",
-                href: "https://github.com/yourusername",
+                href: "https://github.com/adnantabda",
                 style: "bg-gradient-to-r from-gray-800 to-gray-900",
               },
               {
-                icon: <FiTwitter className="w-5 h-5" />,
-                label: "Twitter",
-                href: "https://twitter.com/yourusername",
+                icon: <FaTelegram className="w-5 h-5" />,
+                label: "Telegram",
+                href: "https://t.me/adnanabda",
                 style: "bg-gradient-to-r from-sky-500 to-sky-600",
               },
             ].map((item) => (
