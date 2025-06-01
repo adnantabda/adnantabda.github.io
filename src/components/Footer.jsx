@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaFileAlt } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt, FaTelegram } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,7 +26,6 @@ const Footer = () => {
           {/* Middle: Quick Links */}
           <nav className="flex flex-wrap justify-center gap-6">
             {[
-              { name: "Work", href: "#work" },
               { name: "Skills", href: "#skills" },
               { name: "Projects", href: "#projects" },
               { name: "Contact", href: "#contact" },
@@ -44,11 +43,11 @@ const Footer = () => {
           {/* Right: Social Links */}
           <div className="flex space-x-4">
             {[
-              { icon: <FaGithub />, href: "https://github.com/yourusername", label: "GitHub" },
-              { icon: <FaLinkedin />, href: "https://linkedin.com/in/yourusername", label: "LinkedIn" },
-              { icon: <FaTwitter />, href: "https://twitter.com/yourusername", label: "Twitter" },
-              { icon: <FaEnvelope />, href: "mailto:you@example.com", label: "Email" },
-              { icon: <FaFileAlt />, href: "/resume.pdf", label: "Resume" },
+              { icon: <FaGithub />, href: "https://github.com/adnantabda", label: "GitHub" },
+              { icon: <FaLinkedin />, href: "https://linkedin.com/in/adnantabda", label: "LinkedIn" },
+              { icon: <FaTelegram />, href: "https://t.me/adnanabda", label: "Telegram" },
+              { icon: <FaEnvelope />, href: "mailto:adnantabda@gmail.com", label: "Email" },
+              { icon: <FaFileAlt />, href: "/adnantahir-resume.pdf", label: "Resume" },
             ].map((social) => (
               <a
                 key={social.label}
