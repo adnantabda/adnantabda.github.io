@@ -1,64 +1,56 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adnan Tahir- Software Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
+    
+    <!-- Primary Meta Tags -->
+    <title>Adnan T. — Backend Engineer & SaaS Builder</title>
+    <meta name="title" content="Adnan T. — Backend Engineer & SaaS Builder" />
+    <meta name="description" content="I build scalable backends & SaaS products that are ready for production. Specializing in Go, Node.js, PostgreSQL, and Supabase. Available for freelance and contract work." />
+    <meta name="keywords" content="Backend Engineer, SaaS Developer, Go Developer, Node.js, PostgreSQL, Supabase, API Development, Full Stack Developer, MVP Development, Startup Engineer" />
+    <meta name="author" content="Adnan T." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://adnantabda.github.io/" />
+    <meta property="og:title" content="Adnan T. — Backend Engineer & SaaS Builder" />
+    <meta property="og:description" content="I build scalable backends & SaaS products that are ready for production. Specializing in Go, Node.js, PostgreSQL, and Supabase." />
+    <meta property="og:image" content="https://adnantabda.github.io/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://adnantabda.github.io/" />
+    <meta name="twitter:title" content="Adnan T. — Backend Engineer & SaaS Builder" />
+    <meta name="twitter:description" content="I build scalable backends & SaaS products that are ready for production. Specializing in Go, Node.js, PostgreSQL, and Supabase." />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    
+    <!-- Prevent FOUC -->
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else if (theme === 'dark' || !theme) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <!-- <script ></script> -->
-
-    <script type="module" src="/src/main.jsx">
-      // Random color generation function for dynamic background changes
-      function firstColor() {
-          let red = Math.random() * 255;
-          let green = Math.random() * 255;
-          let blue = Math.random() * 255;
-          return `${red} , ${green} , ${blue}`;
-      }
-
-      function secondColor() {
-          let red = Math.random() * 255;
-          let green = Math.random() * 255;
-          let blue = Math.random() * 255;
-          return `${red} , ${green} , ${blue}`;
-      }
-
-      function thirdColor() {
-          let red = Math.random() * 255;
-          let green = Math.random() * 255;
-          let blue = Math.random() * 255;
-          return `${red} , ${green} , ${blue}`;
-      }
-
-      function fourthColor() {
-          let red = Math.random() * 255;
-          let green = Math.random() * 255;
-          let blue = Math.random() * 255;
-          return `${red} , ${green} , ${blue}`;
-      }
-
-      function fifthColor() {
-          let red = Math.random() * 255;
-          let green = Math.random() * 255;
-          let blue = Math.random() * 255;
-          return `${red} , ${green} , ${blue}`;
-      }
-
-      function changeLinear() {
-          const root = document.querySelector(":root");
-          root.style.setProperty("--bs-primary-rgb", secondColor());
-          root.style.setProperty("--bd-accent-rgb", thirdColor());
-          root.style.setProperty("--bd-violet-rgb", fourthColor());
-          root.style.setProperty("--bd-pink-rgb", fifthColor());
-      }
-
-      setInterval(changeLinear, 2000);
-  </script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

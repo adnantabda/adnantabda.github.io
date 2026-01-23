@@ -1,206 +1,213 @@
 import { useState, useEffect } from 'react';
-import { Menu, Github, Linkedin, Mail, Code2, Terminal, Database } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Moon, Sun, Github, Linkedin } from 'lucide-react';
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const navItems = [
-    { name: 'Home', href: '#home', icon: Terminal },
-    { name: 'Work', href: '#work', icon: Code2 },
-    { name: 'Projects', href: '#projects', icon: Database },
-    { name: 'Skills', href: '#skills', icon: Code2 },
-    { name: 'Contact', href: '#contact', icon: Mail },
+    { name: 'About', sectionId: 'about' },
+    { name: 'Experience', sectionId: 'experience' },
+    { name: 'Projects', sectionId: 'projects' },
+    { name: 'Skills', sectionId: 'skills' },
+    { name: 'Contact', sectionId: 'contact' },
   ];
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/adnantabda', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/adnantabda', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:adnantabda@gmail.com', label: 'Email' },
   ];
 
   const toggleMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    document.body.style.overflow = !isMobileMenuOpen ? 'hidden' : 'auto';
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : 'auto';
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   return (
     <>
-      {/* Mobile Header - Now Hidden */}
       <header
-        className={`lg:hidden hidden fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled 
-            ? 'bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/50 py-3' 
-            : 'bg-slate-900/90 backdrop-blur-lg py-4'
-        }`}
-      >
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <a
-            href="#home"
-            className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Adnan Tahir
-          </a>
-
-          <button
-            className="relative p-2 text-slate-300 hover:text-white transition-colors duration-300 focus:outline-none z-60"
-            onClick={toggleMenu}
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <div className="relative w-6 h-6">
-              <span
-                className={`absolute left-0 w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  isMobileMenuOpen ? 'rotate-45 top-3' : 'top-1'
-                }`}
-              />
-              <span
-                className={`absolute left-0 w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  isMobileMenuOpen ? 'opacity-0' : 'top-2.5'
-                }`}
-              />
-              <span
-                className={`absolute left-0 w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  isMobileMenuOpen ? '-rotate-45 top-3' : 'top-4'
-                }`}
-              />
-            </div>
-          </button>
-        </div>
-
-        {/* Mobile Menu Overlay */}
-        <div
-          className={`fixed inset-0 bg-slate-900/98 backdrop-blur-xl z-50 transition-all duration-500 ${
-            isMobileMenuOpen 
-              ? 'opacity-100 visible' 
-              : 'opacity-0 invisible'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+            ? 'bg-background/80 backdrop-blur-xl border-b border-border'
+            : 'bg-transparent'
           }`}
-        >
-          <div className="container mx-auto px-6 h-full flex flex-col justify-center">
-            <nav className="space-y-8">
-              {navItems.map((item, index) => (
-                <a
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo */}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="text-lg font-semibold text-green-400 hover:opacity-80 transition-opacity"
+            >
+              Adnan T.
+            </button>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <button
                   key={item.name}
-                  href={item.href}
-                  className={`block text-3xl font-light text-slate-300 hover:text-white transition-all duration-300 transform ${
-                    isMobileMenuOpen 
-                      ? 'translate-y-0 opacity-100' 
-                      : 'translate-y-8 opacity-0'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                  onClick={toggleMenu}
+                  onClick={() => scrollToSection(item.sectionId)}
+                  className="text-sm font-medium text-muted-foreground hover:text-green-400 transition-colors duration-200"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
             </nav>
 
-            <div className="mt-16 flex justify-center space-x-8">
-              {socialLinks.map((link, index) => {
-                const IconComponent = link.icon;
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-3 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300 transform ${
-                      isMobileMenuOpen 
-                        ? 'translate-y-0 opacity-100' 
-                        : 'translate-y-8 opacity-0'
-                    }`}
-                    style={{ transitionDelay: `${(index + navItems.length) * 100}ms` }}
-                    aria-label={link.label}
+            {/* Right Section */}
+            <div className="flex items-center gap-2">
+              {/* Social Links - Desktop */}
+              <div className="hidden md:flex items-center gap-1">
+                {socialLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 text-muted-foreground hover:text-green-400 transition-colors rounded-lg hover:bg-secondary"
+                      aria-label={link.label}
+                    >
+                      <Icon size={18} strokeWidth={1.5} />
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block w-px h-5 bg-border mx-2" />
+
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-muted-foreground hover:text-green-400 transition-colors rounded-lg hover:bg-secondary"
+                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={theme}
+                    initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <IconComponent size={24} />
-                  </a>
-                );
-              })}
+                    {theme === 'dark' ? (
+                      <Sun size={18} strokeWidth={1.5} />
+                    ) : (
+                      <Moon size={18} strokeWidth={1.5} />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </button>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={toggleMenu}
+                className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-secondary"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-20 xl:w-72 z-50 bg-slate-950/90 backdrop-blur-xl border-r border-slate-800/30">
-        <div className="flex flex-col h-full w-full p-6">
-          {/* Logo */}
-          <div className="mb-12">
-            <a
-              href="#home"
-              className="group block"
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden"
+          >
+            <motion.nav
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+              className="flex flex-col items-center justify-center h-full gap-8"
             >
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-tr from-cyan-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Terminal size={20} className="text-white" />
-                </div>
-                <div className="hidden xl:block">
-                  <h1 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
-                    Adnan Tahir
-                  </h1>
-                  <p className="text-xs text-slate-400">Software Engineer</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 space-y-2">
-            {navItems.map((item) => {
-              const IconComponent = item.icon;
-              return (
-                <a
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.name}
-                  href={item.href}
-                  className="group flex items-center space-x-3 p-3 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all duration-300"
+                  onClick={() => {
+                    scrollToSection(item.sectionId);
+                    closeMenu();
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + index * 0.05 }}
+                  className="text-2xl font-medium text-foreground hover:text-green-400 transition-colors"
                 >
-                  <IconComponent size={20} className="flex-shrink-0" />
-                  <span className="hidden xl:block font-medium">{item.name}</span>
-                  <div className="hidden xl:block ml-auto w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </a>
-              );
-            })}
-          </nav>
+                  {item.name}
+                </motion.button>
+              ))}
 
-          {/* Social Links */}
-          <div className="border-t border-slate-800/50 pt-6">
-            <div className="space-y-3">
-              {socialLinks.map((link) => {
-                const IconComponent = link.icon;
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center space-x-3 p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-300"
-                    aria-label={link.label}
-                  >
-                    <IconComponent size={18} className="flex-shrink-0" />
-                    <span className="hidden xl:block text-sm">{link.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Status Indicator */}
-          <div className="hidden xl:block mt-6 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-xs text-green-400 font-medium">Available for hire</span>
-            </div>
-          </div>
-        </div>
-      </aside>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="flex items-center gap-4 mt-8"
+              >
+                {socialLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 text-muted-foreground hover:text-green-400 transition-colors rounded-xl bg-secondary"
+                      aria-label={link.label}
+                    >
+                      <Icon size={24} strokeWidth={1.5} />
+                    </a>
+                  );
+                })}
+              </motion.div>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

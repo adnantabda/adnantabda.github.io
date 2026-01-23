@@ -1,125 +1,148 @@
-import React, { useRef } from "react";
-import { motion, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
-import { FiMail, FiLinkedin, FiGithub} from "react-icons/fi";
-import { FaTelegram } from 'react-icons/fa'; // ✅ Font Awesome version
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Mail, Github, Linkedin, ArrowUpRight, Send } from 'lucide-react';
 
+const Contact = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-const ContactSection = () => {
-  const containerRef = useRef(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = ({ clientX, clientY }) => {
-    const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-    mouseX.set(clientX - left - width / 2);
-    mouseY.set(clientY - top - height / 2);
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
   };
 
-  const rotateX = useTransform(mouseY, [-100, 100], [5, -5]);
-  const rotateY = useTransform(mouseX, [-100, 100], [-5, 5]);
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
 
-  const background = useMotionTemplate`radial-gradient(180px circle at ${mouseX}px ${mouseY}px, rgba(99, 102, 241, 0.2), transparent 80%)`;
+  const contactLinks = [
+    {
+      icon: Mail,
+      label: 'Email',
+      description: 'For project inquiries',
+      href: 'mailto:adnantabda@gmail.com',
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      description: 'View my work',
+      href: 'https://github.com/adnantabda',
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      description: 'Connect professionally',
+      href: 'https://linkedin.com/in/adnantabda',
+    },
+  ];
 
   return (
-    <div className="relative py-20 px-4 overflow-hidden dark:to-gray-800" id="contact">
-      {/* Floating gradient dots (background decoration) */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-blue-500 blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-40 h-40 rounded-full bg-purple-500 blur-3xl"></div>
-      </div>
-
-      {/* Main Contact Card (3D Tilt Effect) */}
-      <motion.div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => {
-          mouseX.set(0);
-          mouseY.set(0);
-        }}
-        style={{
-          rotateX,
-          rotateY,
-          background,
-        }}
-        className="relative max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700 backdrop-blur-sm"
-      >
-        {/* Animated Border Gradient */}
-        <div className="absolute inset-0 rounded-2xl p-[2px] overflow-hidden">
-          <motion.div
-            style={{ background }}
-            className="absolute inset-0 rounded-xl"
-          />
-        </div>
-
-        <div className="relative z-10 text-center">
-          <h3 className="text-3xl font-bold text-blue-400 bg-clip-text text-transparent mb-4"             style={{
-              color: `rgb(var(--text-primary))`,
-              fontFamily: `'Inter', sans-serif`,
-            }}>
-            Let's Build Something Amazing
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto">
-            I'm currently available for freelance work or full-time positions. 
-            Whether you have a project in mind or just want to chat tech, I'd love to hear from you!
-          </p>
-
-          {/* Contact Buttons Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                icon: <FiMail className="w-5 h-5" />,
-                label: "Email Me",
-                href: "mailto:adnantabda@gmail.com",
-                style: "bg-gradient-to-r from-blue-500 to-blue-600",
-              },
-              {
-                icon: <FiLinkedin className="w-5 h-5" />,
-                label: "LinkedIn",
-                href: "https://linkedin.com/in/adnantabda",
-                style: "bg-gradient-to-r from-blue-700 to-blue-800",
-              },
-              {
-                icon: <FiGithub className="w-5 h-5" />,
-                label: "GitHub",
-                href: "https://github.com/adnantabda",
-                style: "bg-gradient-to-r from-gray-800 to-gray-900",
-              },
-              {
-                icon: <FaTelegram className="w-5 h-5" />,
-                label: "Telegram",
-                href: "https://t.me/adnanabda",
-                style: "bg-gradient-to-r from-sky-500 to-sky-600",
-              },
-            ].map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{
-                  y: -4,
-                  scale: 1.02,
-                  boxShadow: "0 10px 20px -5px rgba(0, 0, 0, 0.1)",
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className={`${item.style} text-white font-medium rounded-lg p-4 flex items-center justify-center space-x-2 transition-all duration-300 hover:shadow-lg`}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </motion.a>
-            ))}
-          </div>
-
-          {/* Signature Footer */}
-          <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Crafted with care by <span className="font-medium">Adnan Tahir</span> • {new Date().getFullYear()}
+    <section id="contact" className="py-24 sm:py-32" ref={ref}>
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate={isInView ? 'show' : 'hidden'}
+          className="space-y-12"
+        >
+          {/* Header */}
+          <motion.div variants={item} className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              Let's build something that{' '}
+              <span className="text-green-400">actually ships</span>.
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Have an idea, MVP, or SaaS product in mind? I'm currently available
+              and happy to discuss how we can bring it to life.
             </p>
-          </div>
-        </div>
-      </motion.div>
-    </div>
+          </motion.div>
+
+          {/* CTA Card */}
+          <motion.div variants={item} className="max-w-2xl mx-auto">
+            <div className="relative p-8 sm:p-12 rounded-2xl bg-card border border-border overflow-hidden">
+              {/* Gradient decoration */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+              <div className="relative space-y-8">
+                <div className="text-center">
+                  <p className="text-xl sm:text-2xl text-foreground font-medium">
+                    Ready to build a fast, scalable web app?
+                  </p>
+                </div>
+
+                {/* Primary CTA */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href="mailto:adnantabda@gmail.com"
+                    className="group inline-flex items-center gap-2 px-8 py-4 bg-green-500 text-white font-medium rounded-xl hover:bg-green-600 transition-all duration-200 shadow-lg shadow-green-500/20"
+                  >
+                    <Send size={18} />
+                    <span>Send me an email</span>
+                    <ArrowUpRight
+                      size={18}
+                      className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                    />
+                  </a>
+                </div>
+
+                {/* Contact Links */}
+                <div className="grid sm:grid-cols-3 gap-4 pt-8 border-t border-border">
+                  {contactLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target={link.href.startsWith('http') ? '_blank' : undefined}
+                        rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="group flex flex-col items-center p-4 rounded-xl hover:bg-secondary transition-colors"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground group-hover:text-green-400 group-hover:bg-green-500/10 transition-colors mb-3">
+                          <Icon size={20} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-sm font-medium text-foreground">
+                          {link.label}
+                        </span>
+                        <span className="text-xs text-muted-foreground mt-1">
+                          {link.description}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Upwork Badge */}
+          <motion.div variants={item} className="text-center">
+            <p className="text-sm text-muted-foreground mb-3">
+              Also available on
+            </p>
+            <a
+              href="https://www.upwork.com/freelancers/~01f84bd11081481fc7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 text-green-400 rounded-lg border border-green-500/20 hover:bg-green-500/20 transition-colors"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076l.008-.042c.207-1.143.849-3.06 2.839-3.06c1.492 0 2.703 1.212 2.703 2.703c-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366c-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112a2.551 2.551 0 0 1-2.547 2.548a2.55 2.55 0 0 1-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303c2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109c3 0 5.439-2.452 5.439-5.45c0-3-2.439-5.439-5.439-5.439z" />
+              </svg>
+              <span className="font-medium">Upwork Profile</span>
+              <ArrowUpRight size={14} />
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
-export default ContactSection;
+export default Contact;
