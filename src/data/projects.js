@@ -6,7 +6,7 @@ export const projects = [
         description: 'A comprehensive platform for booking and managing educational lessons, featuring real-time synchronization and secure payments.',
         details: 'Built a full-stack lesson management system with advanced filtering, real-time availability, and secure payment processing. Focused on providing a seamless experience for both instructors and students.',
         technologies: ['React', 'Tailwind CSS', 'Supabase', 'Stripe', 'Framer Motion', 'SMTP'],
-        image: '/upforlessons-screenshot.png', // Placeholder for screenshot
+        image: '/upforlessons-screenshot.png',
         link: 'https://upforlessons.com',
         github: '',
         featured: true,
