@@ -46,8 +46,8 @@ const Hero = () => {
           animate={isInView ? 'show' : 'hidden'}
           className="space-y-8"
         >
-          {/* Status Badge */}
-          <motion.div variants={item} className="flex justify-center">
+          {/* Status Badge & Upwork Trust Badges */}
+          <motion.div variants={item} className="flex flex-col items-center gap-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -56,6 +56,18 @@ const Hero = () => {
               <span className="text-sm font-medium text-muted-foreground">
                 Available for new projects
               </span>
+            </div>
+
+            {/* Upwork Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-6 opacity-80">
+              <div className="flex items-center gap-2 group">
+                <img src="/toprated.png" alt="Top Rated" className="w-8 h-8 object-contain  group-hover:grayscale-0 transition-all" />
+                <span className="text-xs font-semibold text-muted-foreground group-hover:text-green-400 transition-colors uppercase tracking-wider">Top Rated</span>
+              </div>
+              <div className="flex items-center gap-2 group">
+                <img src="/jobsuccessscore.png" alt="Job Success" className="w-8 h-8 object-contain group-hover:grayscale-0 transition-all" />
+                <span className="text-xs font-semibold text-muted-foreground group-hover:text-green-400 transition-colors uppercase tracking-wider">100% Job Success</span>
+              </div>
             </div>
           </motion.div>
 

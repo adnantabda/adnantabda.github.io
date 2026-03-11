@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Moon, Sun, Github, Linkedin } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -30,18 +33,28 @@ const Header = () => {
   };
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
   const navItems = [
-    { name: 'About', sectionId: 'about' },
-    { name: 'Experience', sectionId: 'experience' },
-    { name: 'Projects', sectionId: 'projects' },
-    { name: 'Skills', sectionId: 'skills' },
-    { name: 'Contact', sectionId: 'contact' },
+    { name: 'About', sectionId: 'about', type: 'scroll' },
+    { name: 'Testimonials', sectionId: 'testimonials', type: 'scroll' },
+    { name: 'All Projects', path: '/projects', type: 'link' },
+    { name: 'Skills', sectionId: 'skills', type: 'scroll' },
+    { name: 'Contact', sectionId: 'contact', type: 'scroll' },
   ];
 
   const socialLinks = [
@@ -63,8 +76,8 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-border'
-            : 'bg-transparent'
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border'
+          : 'bg-transparent'
           }`}
       >
         <div className="max-w-6xl mx-auto px-6">
@@ -78,15 +91,25 @@ const Header = () => {
             </button>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.sectionId)}
-                  className="text-sm font-medium text-muted-foreground hover:text-green-400 transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
+                item.type === 'link' ? (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className="text-sm font-medium text-muted-foreground hover:text-green-400 transition-colors duration-200"
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.sectionId)}
+                    className="text-sm font-medium text-muted-foreground hover:text-green-400 transition-colors duration-200"
+                  >
+                    {item.name}
+                  </button>
+                )
               ))}
             </nav>
 
@@ -167,19 +190,36 @@ const Header = () => {
               className="flex flex-col items-center justify-center h-full gap-8"
             >
               {navItems.map((item, index) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => {
-                    scrollToSection(item.sectionId);
-                    closeMenu();
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
-                  className="text-2xl font-medium text-foreground hover:text-green-400 transition-colors"
-                >
-                  {item.name}
-                </motion.button>
+                item.type === 'link' ? (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + index * 0.05 }}
+                  >
+                    <Link
+                      to={item.path}
+                      onClick={closeMenu}
+                      className="text-2xl font-medium text-foreground hover:text-green-400 transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.button
+                    key={item.name}
+                    onClick={() => {
+                      scrollToSection(item.sectionId);
+                      closeMenu();
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + index * 0.05 }}
+                    className="text-2xl font-medium text-foreground hover:text-green-400 transition-colors"
+                  >
+                    {item.name}
+                  </motion.button>
+                )
               ))}
 
               <motion.div

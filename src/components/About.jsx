@@ -114,7 +114,7 @@ const About = () => {
                         className="flex flex-wrap justify-center gap-12 pt-8 border-t border-border"
                     >
                         {[
-                            { label: 'Years Experience', value: '3+' },
+                            { label: 'Years Experience', value: '5+' },
                             { label: 'Web Projects Built', value: '20+' },
                             { label: 'Client Satisfaction', value: '100%' },
                         ].map((stat) => (

@@ -6,7 +6,7 @@ const experiences = [
     {
         title: 'Freelance Full-Stack Developer',
         company: 'Remote',
-        period: '2022 – Present',
+        period: '2023 – Present',
         description: [
             'Built SaaS MVPs and startup products using React, Supabase, and PostgreSQL',
             'Worked closely with founders to translate ideas into functional applications',
@@ -17,7 +17,7 @@ const experiences = [
     {
         title: 'Frontend Developer',
         company: 'Various Projects',
-        period: '2021 – 2022',
+        period: '2022 – 2024',
         description: [
             'Developed responsive user interfaces with React and modern CSS',
             'Collaborated with designers using Figma to implement clean UI/UX',
@@ -28,7 +28,7 @@ const experiences = [
     {
         title: 'Backend / API Development',
         company: 'Project-Based',
-        period: '2020 – 2021',
+        period: '2022 – 2025',
         description: [
             'Designed RESTful APIs and database schemas',
             'Implemented authentication, authorization, and real-time features',

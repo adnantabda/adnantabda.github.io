@@ -1,0 +1,50 @@
+export const testimonials = [
+    {
+        id: 1,
+        client: 'Private Client',
+        project: 'Supabase Project Region Migration',
+        rating: 5.0,
+        period: 'Jan 2026',
+        quote: "Adnan was fantastic to work with and made our Supabase database migration to a new region completely seamless. He handled everything end-to-end - schema, storage, edge functions, auth, and all.",
+    },
+    {
+        id: 2,
+        client: 'Private Client',
+        project: 'SaaS Infrastructure (Next.js + Supabase + Stripe)',
+        rating: 5.0,
+        period: 'Jan 2026',
+        quote: "Excellent experience, very professional and highly competent; frankly, you can count on him for your projects.",
+    },
+    {
+        id: 3,
+        client: 'Private Client',
+        project: 'MVP Optimization & Refinement',
+        rating: 5.0,
+        period: 'Oct 2025',
+        quote: "Adnan is a top-notch freelancer—professional, detail-oriented, and committed. He goes above and beyond to complete tasks with accuracy and always meets deadlines. I highly recommend working with him!",
+    },
+    {
+        id: 4,
+        client: 'Founding Team',
+        project: 'Guitar Notation Viewer with Video Sync',
+        rating: 5.0,
+        period: 'Sep 2025',
+        quote: "Adnan is an excellent freelancer—highly skilled, hardworking, and reliable. He delivers every milestone on time with precision and great attention to detail. Truly a pleasure to work with, highly recommended!",
+    },
+    {
+        id: 5,
+        client: 'Mobile App Client',
+        project: 'Flutter Development',
+        rating: 5.0,
+        period: 'Sep 2025',
+        quote: "Adnan is skilled and reliable freelancer.",
+    },
+    {
+        id: 6,
+        client: 'Founding Team',
+        project: 'App Development Strategy & Execution',
+        rating: 5.0,
+        period: 'Aug 2025',
+        quote: "I had the pleasure of working with Adnan on developing my app, and the experience was outstanding from start to finish. He was not only highly skilled technically but also incredibly professional.",
+    }
+];
